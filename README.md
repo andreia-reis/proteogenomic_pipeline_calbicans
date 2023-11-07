@@ -1,1 +1,1 @@
-# proteogenomic_pipeline_calbicans
+# Proteogenomic pipeline for Candida albicans
