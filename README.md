@@ -93,11 +93,11 @@ tablefinalproteomics.txt
 <b>5. CaAllCodonAnalysisII.R</b>
 
 <i>-  Input file(s):</i>
-
+tablefinalproteomics.txt
 <i>-  Output files(s):</i>
 
 <i>- Description:</i>
-
+For a specific aa (of your choice!) calculates the codon/sub frequencies
    
 ## Full workflow (described in the methods section)
 
