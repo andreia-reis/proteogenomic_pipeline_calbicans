@@ -14,7 +14,7 @@ Inês Correia<sup>1a</sup>, Carla Oliveira<sup>1</sup>, Andreia Reis<sup>1</sup>
 
 <b>1. CaPeaksMainFiles.R</b>
    
-- Input file(s):
+<i>- Input file(s):</i>
 
 protein-peptides.csv
 
@@ -22,7 +22,7 @@ peptides.cvs
 
 Ca_A22-s07-m01-r149_AT_PROTEIN_29032022.fasta 
    
-   - Output file(s):
+   <i>- Output file(s):</i>
 
 protein-peptides_NoSub.txt
 
@@ -30,13 +30,13 @@ protein-peptides_NoSubForAccept.txt
 
 protein-peptides_Sub.txt
 
-   - Description:
+   <i>- Description:</i>
 
    This script generates the main files for validation (in directed searches) and codon assignment. In the protein-peptides file from PEAKS, the duplicates are removed (due to allelic duplication) and the file is separated into peptides with substitutions (Sub) and without mutations (noSubForAccept). The noSubForAccept file is further filtered to remove peptides whose PTMs do not pass the Ascore filter (20) and peptides with insertions and/or deletions that do not pass the ion intensity filter (5%) by matching with peptidesInDels.cvs file. The Subfile from protein-peptides.cvs is matched to the peptides.cvs file to remove entries with mutations not passing the ion intensity filter (5%). The script also generates a mutated proteome database, which will be used in a second round of PEAKS DB search for directed searches: it takes the mutated peptides without duplicates, searches the corresponding protein, and changes de protein sequence according to the mutated peptide.
    
 <b>2. CaPeaksValidation.R</b>
    
-- Input file(s):
+<i>- Input file(s):</i>
 
 protein-peptides_Sub.txt
 
@@ -44,37 +44,37 @@ protein-peptides_NoSubForAccept.txt
 
 protein-peptides_NoSub.txt
 
-  - Output files(s):
+ <i>- Output files(s):</i>
 
 protein-peptides_SubAccepted.txt
 
 protein-peptidesAllCodons.txt
 
--  Description:
+<i>-  Description:</i>
 
    This script filters mut peptides by accepting only amino acid misincorporations whose base peptides (peptides without the mutation) are present in the mainfile from PEAKS (original one with all indels and PTMs before their validation – protein-peptides_NoSubForAccept). A file is created to analyse the correspondence (useful for areas comparison, for instance). This script also prepares a file with all peptides (the ones with accepted substitutions plus the filtered NoSub peptides from PEAKS – protein-peptides_NoSub).
 
 <b>3. CaSubCodonsAnalysis.R</b>
    
-  - Input file(s):
+ <i>- Input file(s):</i>
 
 protein-peptides_SubAccepted.txt
 
 Ca_A22-s07-m01-r149_AT_CODING_29032022.fasta
 
-   - Output files(s):
+  <i>- Output files(s):</i>
    
 tablefinalproteomics.txt
 
 TOPcodonsSubst.txt
 
--  Description:
+<i>-  Description:</i>
    
    This script assigns the top most frequent codons to amino acids and calculates codon/sub frequencies.
 
 <b>4. CaAllCodonsAnalysisI.R</b>
 
-- Input file(s):
+<i>- Input file(s):</i>
 
 Ca_A22-s07-m01-r149_AT_CODING_29032022.fasta
 
@@ -82,21 +82,21 @@ Ca_A22-s07-m01-r149_AT_PROTEIN_29032022.fasta
 
 protein-peptidesAllCodons.txt
 
-- Output files(s):
+<i>- Output files(s):</i>
 
 tablefinalproteomics.txt
 
--  Description:
+<i>-  Description:</i>
 
    This script assigns all codons to amino acids and calculates codon/sub frequencies.
 
 <b>5. CaAllCodonAnalysisII.R</b>
 
--  Input file(s):
+<i>-  Input file(s):</i>
 
- -  Output files(s):
+<i>-  Output files(s):</i>
 
-- Description
+<i>- Description:</i>
 
    
 ## Full workflow (described in the methods section)
