@@ -57,7 +57,7 @@ for(i in 1:nrow(pepsubst_check)){
 pepsubst_Accepted<-pepsubst_check[pepsubst_check$found=="ACCEPT",]
 table(pepsubst_Accepted$found)
 
-# Generate complete mainfile: pepsubst accepted + mainfile nosub (filtered indels and PTMs)
+# Generate complete mainfile: pepsubst accepted + mainfile nosub (with filtered indels and PTMs)
 write.csv(pepsubst_Accepted, file="protein-peptides_SubAccepted.txt", row.names = FALSE)
 mainfile_noSub <- read.delim(file="protein-peptides_NoSub.txt", sep=" ")
 allcodons_prep<-rbind.fill(pepsubst_Accepted, mainfile_noSub)

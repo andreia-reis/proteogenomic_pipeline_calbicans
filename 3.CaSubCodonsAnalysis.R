@@ -21,7 +21,7 @@ pepsubst.fasta = dataframe2fas(pepsubst, file="pepsubst.fasta")
 pepsubst_no <- data.frame(listpep$CGDid,listpep$seqOriginal2)
 pepsubst_no.fasta = dataframe2fas(pepsubst_no, file="pepsubst_nosymbol.fasta")
 
-finalproteins<-listpep[,c(1,53)] ##change here for proteinSeq column if needed
+finalproteins<-listpep[,c(1,48)] ##change here for proteinSeq column if needed
 originalprotein.fasta = dataframe2fas(finalproteins, file="originalprotein.fasta")
 
 # match pattern between peptide and protein seq

@@ -91,7 +91,7 @@ extractNoSubForAccept$pepSeq4<-gsub("(.+)\\.\\-", "\\1", extractNoSubForAccept$p
 
 write.table(extractNoSubForAccept, "protein-peptides_NoSubForAccept.txt", row.names = FALSE)
 
-######GENERATE NoSub FILE FOR MISTRANSLATION RATE######
+######GENERATE NoSub FILE FOR MISTRANSLATION FREQUENCY######
 
 # validate InDels _ peptidesInDels.csv 
 extractNoSub_noInDels<-extractNoSubForAccept[grep("\\(ins\\)|\\(del\\s(\\w+)\\)", extractNoSubForAccept$Peptide, invert = T),]
