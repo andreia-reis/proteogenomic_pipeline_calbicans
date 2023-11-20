@@ -18,7 +18,9 @@ Inês Correia<sup>1a</sup>, Carla Oliveira<sup>1</sup>, Andreia Reis<sup>1</sup>
 
 protein-peptides.csv
 
-peptides.cvs
+peptides.csv
+
+peptides_InDels.cvs
 
 Ca_A22-s07-m01-r149_AT_PROTEIN_29032022.fasta 
    
@@ -32,9 +34,9 @@ protein-peptides_Sub.txt
 
    <i>- Description:</i>
 
-   This script generates the main files for validation (in directed searches) and codon assignment. In the protein-peptides file from PEAKS, the duplicates are removed (due to allelic duplication) and the file is separated into peptides with substitutions (Sub) and without mutations (noSubForAccept). The noSubForAccept file is further filtered to remove peptides whose PTMs do not pass the Ascore filter (20) and peptides with insertions and/or deletions that do not pass the ion intensity filter (5%) by matching with peptidesInDels.cvs file. The Subfile from protein-peptides.cvs is matched to the peptides.cvs file to remove entries with mutations not passing the ion intensity filter (5%). The script also generates a mutated proteome database, which will be used in a second round of PEAKS DB search for directed searches: it takes the mutated peptides without duplicates, searches the corresponding protein, and changes de protein sequence according to the mutated peptide.
+   This script generates the main files for peptide validation and codon assignment. In the protein-peptides file from PEAKS, the duplicates are removed (due to allelic duplication) and the file is divided into two new files containing: peptides with substitutions (Sub) and without substitutions (noSubForAccept). The noSubForAccept file is further filtered to remove peptides whose PTMs do not pass the Ascore filter (20), and therefore are not depicted in the PTM column at protein-peptides file, and peptides with insertions and/or deletions that do not pass the ion intensity filter (5%) by matching with peptidesInDels.cvs file. The peptidesInDels.cvs is the peptides.cvs file extracted from PEAKS that contains only peptides with insertions and deletions. The Sub file is matched to the peptides.cvs file containing only mutations found by SPIDER to remove entries with mutations not passing the ion intensity filter (5%).
    
-<b>2. CaPeaksValidation.R</b>
+<b>2. CaPepValidation.R</b>
    
 <i>- Input file(s):</i>
 
@@ -50,9 +52,20 @@ protein-peptides_SubAccepted.txt
 
 protein-peptidesAllCodons.txt
 
+protein-peptides_SubAcceptedF1.txt
+
+protein-peptidesAllCodonsF1.txt
+
+protein-peptides_SubAcceptedF2.txt
+
+protein-peptidesAllCodonsF2.txt
+
 <i>-  Description:</i>
 
-   This script filters mut peptides by accepting only amino acid misincorporations whose base peptides (peptides without the mutation) are present in the mainfile from PEAKS (original one with all indels and PTMs before their validation – protein-peptides_NoSubForAccept). A file is created to analyse the correspondence (useful for areas comparison, for instance). This script also prepares a file with all peptides (the ones with accepted substitutions plus the filtered NoSub peptides from PEAKS – protein-peptides_NoSub).
+   This script filters sub peptides by accepting only amino acid misincorporations whose base peptides (peptides without the mutation) are present in the mainfile from PEAKS (original one with all indels and PTMs before their validation – protein - peptides_NoSubForAccept). An intermediate file is created to analyse the correspondence. This script also prepares a final file with all filtered peptides (the ones with validated substitutions and accepted NoSub peptides): protein-peptides_AllCodons. 
+   Other files with different filtering parameters are also created (F1 and F2). 
+   F1 removes duplicated peptides (with and without substitutions) whose CGDid, peptide sequence and mass are the same (considers duplicates those peptides that contain the same PTMs in different locations).
+   F2 removes duplicated peptides (with and without substitutions) whose CGDid and peptide sequence are the same (considers duplicates those peptides with same base sequence, independently of having PTMs).
 
 <b>3. CaSubCodonsAnalysis.R</b>
    
@@ -64,13 +77,24 @@ Ca_A22-s07-m01-r149_AT_CODING_29032022.fasta
 
   <i>- Output files(s):</i>
    
-tablefinalproteomics.txt
+pepsubst.fasta
+
+pepsubst_nosymbol.fasta
+
+originalprotein.fasta
+
+DupliPeptide.txt
+
+DupliPepDifferentCodon.txt
+
+tablefinalproteomics.txt/.cvs
 
 TOPcodonsSubst.txt
 
 <i>-  Description:</i>
    
-   This script assigns the top most frequent codons to amino acids and calculates codon/sub frequencies.
+   This script assigns codons to amino acids and calculates codon/sub frequencies.
+Protein-peptide correspondence is analysed to identify putative errors on codon assignment due multiple peptide matching within the same protein. Duplicates are removed: same peptide matched to different proteins. As DNA sequence may be different, the information is kept so the putative error on codon assignment can be analysed. The Protein-DNA correspondence is analysed to analyse putative discrepancies between the files.
 
 <b>4. CaAllCodonsAnalysisI.R</b>
 
@@ -88,7 +112,7 @@ tablefinalproteomics.txt
 
 <i>-  Description:</i>
 
-   This script assigns all codons to amino acids and calculates codon/sub frequencies.
+   This script assigns codons to amino acids from all validated and accepted peptides. This is necessary to obtain the total number of codons encoding a specific amino acid and calculate the mistranslation frequency. Total codon frequency is obtained from the file protein-peptidesAllCodons. Protein-peptide correspondence is analysed to identify putative errors on codon assignment due multiple peptide matching within the same protein. The Protein-DNA correspondence is analysed to analyse putative discrepancies between the files.
 
 <b>5. CaAllCodonAnalysisII.R</b>
 
@@ -98,11 +122,19 @@ tablefinalproteomics.txt
 
 <i>-  Output files(s):</i>
 
-ALLcounts_final_X.txt (X is the aa of your choice!) 
+tablefinalproteomicsDupli_with_X.txt
+
+DupliPeptide.txt
+
+DupliPepDifferentCodon.txt
+
+tablefinalproteomics_with_X.txt (X is the aa of your analysis!)
+
+ALLcounts_final_X.txt
 
 <i>- Description:</i>
 
-For a specific aa (of your choice!) calculates the codon/sub frequencies
+This script analysis which codons, and how many, are assigning each specific amino acid (ex. Histidine is being codified by 8621 CAU and 4832 CAC codons). This is necessary to obtain the total number of codons encoding a specific amino acid so mistranslation frequency can be calculated. For each amino acid, the script checks if all matches are possible (absence of NA or NNN) and removes duplicates: same peptide matched to different proteins. When the assigned codon is different, the information is kept so the putative error on codon assignment can be analysed.
    
 ## Full workflow (described in the methods section)
 
