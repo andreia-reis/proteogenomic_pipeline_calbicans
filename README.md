@@ -134,7 +134,7 @@ ALLcounts_final_X.txt
 
 <i>- Description:</i>
 
-This script analysis which codons, and how many, are assigning each specific amino acid (ex. Histidine is being codified by 8621 CAU and 4832 CAC codons). This is necessary to obtain the total number of codons encoding a specific amino acid so mistranslation frequency can be calculated. For each amino acid, the script checks if all matches are possible (absence of NA or NNN) and removes duplicates: same peptide matched to different proteins. When the assigned codon is different, the information is kept so the putative error on codon assignment can be analysed.
+This script analyses which codons, and how many, are assigning each specific amino acid (ex. Histidine is being codified by 8621 CAU and 4832 CAC codons). This is necessary to obtain the total number of codons encoding a specific amino acid so mistranslation frequency can be calculated. For each amino acid, the script checks if all matches are possible (absence of NA or NNN) and removes duplicates: same peptide matched to different proteins. When the assigned codon is different, the information is kept so the putative error on codon assignment can be analysed.
    
 ## Full workflow (described in the methods section)
 
