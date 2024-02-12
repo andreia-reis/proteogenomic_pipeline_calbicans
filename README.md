@@ -141,3 +141,5 @@ This script analyses which codons, and how many, are assigning each specific ami
 ![image](https://github.com/andreia-reis/proteogenomic_pipeline_calbicans/assets/19263451/63bbd7eb-6772-4485-9cb4-71b036e00e3c)
 
 Figure 1. Workflow for mistranslation analysis. Protein extracts from actively growing cultures were resolved in SDS-PAGE and divided into 8 fractions. Bands were manually excised from the gel, digested, and injected separately in the MS system. Raw MS/MS data was analysed by PEAKS Xpro software. The list of identified peptides was filtered to remove duplicates and low-quality hits, and codon assignment and mistranslation frequency was calculated using R scripts. Numbers indicate the number of peptides identified or validated in each step of the pipeline from T0 (wild-type) strain. 
+
+[![DOI](https://zenodo.org/badge/715792884.svg)](https://zenodo.org/doi/10.5281/zenodo.10651621)
